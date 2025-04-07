@@ -16,6 +16,8 @@ public class DigitalAssistant {
 
     // Getter and Setters
 
+    public long getId() {return this.id;}
+
     public String getAssistantName() {
         return assistantName;
     }
@@ -24,6 +26,8 @@ public class DigitalAssistant {
         return assistantMessage;
     }
 
+    public void setId(long id) {this.id = id;}
+
     public void setAssistantName(String assistantName) {
         this.assistantName = assistantName;
     }
@@ -31,4 +35,6 @@ public class DigitalAssistant {
     public void setAssistantMessage(String assistantMessage) {
         this.assistantMessage = assistantMessage;
     }
+
+
 }

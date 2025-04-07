@@ -1,0 +1,31 @@
+// @no-log
+@BASE_URL = http://localhost:8080/api/
+@NAME = Money Maker
+@NAME_URL = money maker
+@DESCR =  I make you the moneys
+
+GET {{BASE_URL}}digital_assistants
+Content-Type: application/json
+
+###
+
+POST {{BASE_URL}}digital_assistants
+Content-Type: application/json
+
+{
+    "assistantName": "{{NAME}}",
+    "assistantMessage": "{{DESCR}}"
+}
+
+###
+
+GET {{BASE_URL}}digital_assistants?name={{NAME_URL}}
+Content-Type: application/json
+
+
+###
+
+GET {{BASE_URL}}digital_assistants/message?name={{NAME_URL}}
+Content-Type: application/json
+
+

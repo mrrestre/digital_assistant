@@ -1,8 +1,7 @@
-// @no-log
+
 @BASE_URL = http://localhost:8080/api/
-@NAME = Money Maker
-@NAME_URL = money maker
-@DESCR =  I make you the moneys
+@NAME = Sir-Taskalot
+@DESCR = At your service, noble one—what task shall I conquer for you today?
 
 GET {{BASE_URL}}digital_assistants
 Content-Type: application/json
@@ -19,13 +18,13 @@ Content-Type: application/json
 
 ###
 
-GET {{BASE_URL}}digital_assistants?name={{NAME_URL}}
+GET {{BASE_URL}}digital_assistants?name={{NAME}}
 Content-Type: application/json
 
 
 ###
 
-GET {{BASE_URL}}digital_assistants/message?name={{NAME_URL}}
+GET {{BASE_URL}}digital_assistants/message?name={{NAME}}
 Content-Type: application/json
 
 

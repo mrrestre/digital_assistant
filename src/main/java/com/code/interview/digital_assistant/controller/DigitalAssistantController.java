@@ -2,6 +2,7 @@ package com.code.interview.digital_assistant.controller;
 
 import com.code.interview.digital_assistant.model.DigitalAssistant;
 import com.code.interview.digital_assistant.repository.DigitalAssistantRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,8 @@ public class DigitalAssistantController {
 
     @GetMapping(params = "name")
     public ResponseEntity<DigitalAssistant> getByName(@RequestParam("name") String assistantName) {
-        DigitalAssistant digitalAssistant = digitalAssistantRepository.findByAssistantName(assistantName.toLowerCase(Locale.ROOT));
+        DigitalAssistant digitalAssistant = digitalAssistantRepository
+                .findByAssistantName(assistantName.toLowerCase(Locale.ROOT));
 
         if (digitalAssistant != null) {
             return ResponseEntity.ok(digitalAssistant);
@@ -34,8 +36,8 @@ public class DigitalAssistantController {
         }
     }
 
-    @GetMapping(value="/message", params = "name")
-    public ResponseEntity<String > getMessageByName(@RequestParam("name") String assistantName) {
+    @GetMapping(value = "/message", params = "name")
+    public ResponseEntity<String> getMessageByName(@RequestParam("name") String assistantName) {
         DigitalAssistant digitalAssistant = digitalAssistantRepository.findByAssistantName(assistantName.toLowerCase());
 
         if (digitalAssistant != null) {

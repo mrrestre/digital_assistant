@@ -46,6 +46,19 @@ public class DigitalAssistantController {
         }
     }
 
+    @GetMapping(value = "/chat", params = { "assistantName", "userMessage" })
+    public ResponseEntity<String> respondUserMessage(@RequestParam("assistantName") String assistantName,
+            @RequestParam("userMessage") String userMessage) {
+        DigitalAssistant digitalAssistant = digitalAssistantRepository.findByAssistantName(assistantName.toLowerCase());
+
+        if (digitalAssistant != null) {
+            return ResponseEntity
+                    .ok("User: " + userMessage + ", Assistant Message: " + digitalAssistant.getAssistantMessage());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping
     public ResponseEntity<DigitalAssistant> create(@RequestBody DigitalAssistant digitalAssistant) {
         if (digitalAssistantRepository.findByAssistantName(digitalAssistant.getAssistantName()) != null) {

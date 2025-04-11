@@ -34,7 +34,10 @@ public class DigitalAssistantControllerTest {
     /////// Helper variables ///////
     private final String baseEndpoint = "/api/digital_assistants";
     private final String assistantMessageEndpoint = baseEndpoint + "/message";
+    private final String chatEndpoint = baseEndpoint + "/chat";
+
     private final String paramAssistantName = "assistantName";
+    private final String paramUserMessage = "userMessage";
 
     private final String jsonAssistantBasePath = "$";
     private final String jsonAssistantNamePath = "$.assistantName";
@@ -56,6 +59,10 @@ public class DigitalAssistantControllerTest {
     private final String newAssistantName = "NewAssistant3000";
     private final String newAssistantMessage = "The better and improved assistant 3000";
 
+    private final String userMessage = "Hello Assistant!";
+
+    private final String assistantChatResponse = "User: " + userMessage + ", Assistant Message: " + assistantMessage1;
+
     @BeforeEach
     void setup() {
         digitalAssistantRepository.deleteAll(); // Clean up before each test
@@ -70,6 +77,7 @@ public class DigitalAssistantControllerTest {
         digitalAssistantRepository.save(assistant2);
     }
 
+    /////// Get Base Endpoint ///////
     @Test
     void getAllAssistants_shouldReturnListOfAssistants() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get(baseEndpoint))
@@ -97,6 +105,7 @@ public class DigitalAssistantControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
+    /////// Get Assistant Message Endpoint ///////
     @Test
     void getMessageByName_existingAssistant_shouldReturnMessage() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get(assistantMessageEndpoint)
@@ -113,6 +122,26 @@ public class DigitalAssistantControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
+    /////// Get Chat Endpoint ///////
+    @Test
+    void chattingWithNamedAssistant_shouldReturnAssistantMessage() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get(chatEndpoint)
+                .param(paramAssistantName, assistantName1)
+                .param(paramUserMessage, userMessage))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(plainTextUTF8))
+                .andExpect(MockMvcResultMatchers.content().string(assistantChatResponse));
+    }
+
+    @Test
+    void chattingWitNonExistingAssistant_shouldReturnNotFound() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get(chatEndpoint)
+                .param(paramAssistantName, nonExistantAssistantName)
+                .param(paramUserMessage, userMessage))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    /////// Post Base Endpoint ///////
     @Test
     void createAssistant_uniqueName_shouldReturnCreatedAssistant() throws Exception {
         DigitalAssistant newAssistant = new DigitalAssistant();

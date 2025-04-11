@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Locale;
 
 @RestController
 @RequestMapping("/api/digital_assistants")
@@ -24,10 +23,10 @@ public class DigitalAssistantController {
         return ResponseEntity.ok(assistants);
     }
 
-    @GetMapping(params = "name")
-    public ResponseEntity<DigitalAssistant> getByName(@RequestParam("name") String assistantName) {
+    @GetMapping(params = "assistantName")
+    public ResponseEntity<DigitalAssistant> getByName(@RequestParam("assistantName") String assistantName) {
         DigitalAssistant digitalAssistant = digitalAssistantRepository
-                .findByAssistantName(assistantName.toLowerCase(Locale.ROOT));
+                .findByAssistantName(assistantName.toLowerCase());
 
         if (digitalAssistant != null) {
             return ResponseEntity.ok(digitalAssistant);
@@ -36,8 +35,8 @@ public class DigitalAssistantController {
         }
     }
 
-    @GetMapping(value = "/message", params = "name")
-    public ResponseEntity<String> getMessageByName(@RequestParam("name") String assistantName) {
+    @GetMapping(value = "/message", params = "assistantName")
+    public ResponseEntity<String> getMessageByName(@RequestParam("assistantName") String assistantName) {
         DigitalAssistant digitalAssistant = digitalAssistantRepository.findByAssistantName(assistantName.toLowerCase());
 
         if (digitalAssistant != null) {

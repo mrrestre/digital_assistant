@@ -13,10 +13,11 @@ public class DigitalAssistant {
 
     private String assistantMessage;
 
-
     // Getter and Setters
 
-    public long getId() {return this.id;}
+    public long getId() {
+        return this.id;
+    }
 
     public String getAssistantName() {
         return assistantName;
@@ -26,15 +27,16 @@ public class DigitalAssistant {
         return assistantMessage;
     }
 
-    public void setId(long id) {this.id = id;}
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public void setAssistantName(String assistantName) {
-        this.assistantName = assistantName;
+        this.assistantName = assistantName.toLowerCase();
     }
 
     public void setAssistantMessage(String assistantMessage) {
         this.assistantMessage = assistantMessage;
     }
-
 
 }

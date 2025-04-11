@@ -18,13 +18,13 @@ Content-Type: application/json
 
 ###
 
-GET {{BASE_URL}}digital_assistants?name={{NAME}}
+GET {{BASE_URL}}digital_assistants?assistantName={{NAME}}
 Content-Type: application/json
 
 
 ###
 
-GET {{BASE_URL}}digital_assistants/message?name={{NAME}}
+GET {{BASE_URL}}digital_assistants/message?assistantName={{NAME}}
 Content-Type: application/json
 
 
